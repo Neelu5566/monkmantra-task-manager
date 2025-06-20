@@ -110,16 +110,16 @@ Handled in backend using try-catch blocks and basic validation. Frontend handles
 
 ### 5. Deployment:
 
-* Deploy using Vercel + Railway
+* Deploy using Vercel + Render + Railway
 
-Link: 
-
+Vercel Link: https://monkmantra-task-manager.vercel.app
+Render Link: https://monkmantra-task-manager-backend.onrender.com
 ---
 
 ## 👤 Author
 
 **Neelakanteswar Bathula**
-LinkedIn: 
+LinkedIn: https://www.linkedin.com/in/neelanteswar2705
 Portfolio: https://neelakanteswar.vercel.app
 
 ---
