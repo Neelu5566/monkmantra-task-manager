@@ -17,7 +17,7 @@ export default function Home() {
 
   const addTask = async () => {
     if (!title.trim()) return
-    await fetch("http://localhost:5000/tasks", {
+    await fetch(`${API_URL}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, status: "pending" }),
@@ -27,12 +27,12 @@ export default function Home() {
   }
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, { method: "DELETE" })
+    await fetch(`${API_URL}/tasks/${id}`, { method: "DELETE" })
     fetchTasks()
   }
 
   const toggleStatus = async (task) => {
-    await fetch(`http://localhost:5000/tasks/${task.id}`, {
+    await fetch(`${API_URL}/tasks/${task.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
