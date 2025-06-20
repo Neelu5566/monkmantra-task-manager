@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useState } from "react"
-fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`)
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function Home() {
   const [tasks, setTasks] = useState([])
   const [title, setTitle] = useState("")
 
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/tasks")
+    const res = await fetch(`${API_URL}/tasks`);
     const data = await res.json()
     setTasks(data)
   }
