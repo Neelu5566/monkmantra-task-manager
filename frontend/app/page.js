@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
-
+fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`)
 export default function Home() {
   const [tasks, setTasks] = useState([])
   const [title, setTitle] = useState("")

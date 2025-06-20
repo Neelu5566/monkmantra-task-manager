@@ -1,28 +1,29 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+require('dotenv').config(); // 👈 Load .env variables
+
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-// 🔌 PostgreSQL connection
+// 🔌 PostgreSQL connection using env variable
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'tasks_db',
-  password: 'Neelu@02',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
-// GET all tasks
+// API endpoints
+
 app.get('/tasks', async (req, res) => {
   const result = await pool.query('SELECT * FROM tasks ORDER BY id DESC');
   res.json(result.rows);
 });
 
-// POST a new task
 app.post('/tasks', async (req, res) => {
   const { title, status } = req.body;
   const result = await pool.query(
@@ -32,7 +33,6 @@ app.post('/tasks', async (req, res) => {
   res.status(201).json(result.rows[0]);
 });
 
-// UPDATE task
 app.put('/tasks/:id', async (req, res) => {
   const { id } = req.params;
   const { title, status } = req.body;
@@ -43,7 +43,6 @@ app.put('/tasks/:id', async (req, res) => {
   res.json(result.rows[0]);
 });
 
-// DELETE task
 app.delete('/tasks/:id', async (req, res) => {
   const { id } = req.params;
   await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
@@ -51,5 +50,5 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Server is running at http://localhost:${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });
